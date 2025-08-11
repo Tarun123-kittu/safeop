@@ -1,20 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { SafeAreaView, TouchableOpacity, Text, StyleSheet } from "react-native";
+import useBLE from "./useBLE";
+import DeviceModal from "./DeviceConnectionModal";
+import DeviceList from "./DeviceList";
 
-export default function App() {
+const App = () => {
+  const {
+    requestPermissions,
+    scanForPeripherals,
+    connectToDevice,
+    disconnectFromDevice,
+    connectedDevices,
+    availableDevices,
+  } = useBLE();
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const openModal = async () => {
+    await requestPermissions();
+    setIsModalVisible(true);
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      {/* <TouchableOpacity style={styles.button} onPress={openModal}>
+        <Text style={styles.buttonText}>Manage Devices</Text>
+      </TouchableOpacity>
+
+      <DeviceModal
+        visible={isModalVisible}
+        closeModal={() => setIsModalVisible(false)}
+        connectedDevices={connectedDevices}
+        availableDevices={availableDevices}
+        onAddNewDevice={scanForPeripherals}
+        onConnect={connectToDevice}
+        onDisconnect={(device) => disconnectFromDevice(device.id)}
+      /> */}
+      <DeviceList />
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  container: { flex: 1, justifyContent: "center", alignItems: "center" },
+  button: { padding: 15, backgroundColor: "#FF6060", borderRadius: 8 },
+  buttonText: { color: "white", fontWeight: "bold" },
 });
+
+export default App;
