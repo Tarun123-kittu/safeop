@@ -30,6 +30,8 @@ const DeviceModal: React.FC<Props> = ({
 }) => {
   const [showAvailable, setShowAvailable] = useState(false);
 
+  console.log(connectedDevices, "connectedDevices");
+
   return (
     <Modal visible={visible} animationType="slide" onRequestClose={closeModal}>
       <View style={styles.container}>
