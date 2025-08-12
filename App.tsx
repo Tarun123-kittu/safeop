@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { SafeAreaView, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import useBLE from "./useBLE";
 import DeviceModal from "./DeviceConnectionModal";
 import DeviceList from "./DeviceList";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const App = () => {
   const {
@@ -42,7 +43,7 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" },
+  container: { flex: 1 },
   button: { padding: 15, backgroundColor: "#FF6060", borderRadius: 8 },
   buttonText: { color: "white", fontWeight: "bold" },
 });
